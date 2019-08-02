@@ -21,6 +21,9 @@ public class Done_GameController : MonoBehaviour
     private bool gameOver;
     private bool restart;
     private int score;
+    public AudioSource musicSource;
+    public AudioClip musicClipOne;
+    public AudioClip musicClipTwo;
 
     void Start()
     {
@@ -49,6 +52,12 @@ public class Done_GameController : MonoBehaviour
         {
             Application.Quit();
         }
+
+		if (winGame)
+		{
+			GetComponent<AudioSource>().Play ();
+            musicSource.Play();
+		}
     }
 
     IEnumerator SpawnWaves()

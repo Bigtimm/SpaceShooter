@@ -17,7 +17,7 @@ public class Done_PlayerController : MonoBehaviour
 	public Transform shotSpawn;
 	public float fireRate;
 	 
-	private float nextFire;
+	public float nextFire;
 	
 	void Update ()
 	{
@@ -27,6 +27,7 @@ public class Done_PlayerController : MonoBehaviour
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
 			GetComponent<AudioSource>().Play ();
 		}
+
 	}
 
 	void FixedUpdate ()

@@ -7,6 +7,12 @@ public class Done_DestroyByContact : MonoBehaviour
 	public GameObject playerExplosion;
 	public int scoreValue;
 	private Done_GameController gameController;
+	public Done_PlayerController playerController;
+	public GameObject shot;
+	public Transform shotSpawn;
+	public float fireRate;
+
+
 
 	void Start ()
 	{
@@ -27,6 +33,13 @@ public class Done_DestroyByContact : MonoBehaviour
 		{
 			return;
 		}
+
+		if (other.tag == "Powerup")
+		{
+			playerController.nextFire = Time.time + fireRate * 2;
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			GetComponent<AudioSource>().Play ();
+		}
  		
 		 if (gameController.winGame == true)
         {
@@ -43,7 +56,6 @@ public class Done_DestroyByContact : MonoBehaviour
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
-
 		
 		
 		gameController.AddScore(scoreValue);
