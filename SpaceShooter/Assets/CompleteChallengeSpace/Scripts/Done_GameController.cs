@@ -18,7 +18,7 @@ public class Done_GameController : MonoBehaviour
     public Text gameOverText;
     
     public bool winGame;
-    private bool gameOver;
+    public bool gameOver;
     private bool restart;
     private int score;
     public AudioSource musicSource;
@@ -97,10 +97,22 @@ public class Done_GameController : MonoBehaviour
         score += newScoreValue;
         UpdateScore();
         
-        if (score >= 100)
+        if (score == 100)
         {
             winText.text = "You Win! Game Created By Timmothy Tapia";
             winGame = true;
+        }
+
+        if (score > 100)
+        {
+            gameOverText.text = "Game Over!";
+            gameOver = true;
+        }
+
+        if (score < 0)
+        {
+            gameOverText.text = "Game Over!";
+            gameOver = true;
         }
 
     }

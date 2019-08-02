@@ -33,18 +33,16 @@ public class Done_DestroyByContact : MonoBehaviour
 		{
 			return;
 		}
-
-		if (other.tag == "Powerup")
-		{
-			playerController.nextFire = Time.time + fireRate * 2;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-			GetComponent<AudioSource>().Play ();
-		}
  		
 		 if (gameController.winGame == true)
         {
             return;
         }
+
+		if (gameController.gameOver == true)
+		{
+			return;
+		}
 		
 		if (explosion != null)
 		{
