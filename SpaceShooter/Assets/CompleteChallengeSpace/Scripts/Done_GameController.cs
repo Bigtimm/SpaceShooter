@@ -52,8 +52,13 @@ public class Done_GameController : MonoBehaviour
 
 		if (winGame)
 		{
-			
+            GetComponent<AudioSource>().Play();
 		}
+
+        if (gameOver)
+        {
+            GetComponent<AudioSource>().Play();
+        }
     }
 
     IEnumerator SpawnWaves()
