@@ -132,6 +132,17 @@ public class Done_GameController : MonoBehaviour
             Music.clip = win_music; Music.Play();
             playerController.winMove();
         }
+
+        if (score < 0)
+        {
+            gameOverText.text = "Game Over!";
+            gameOver = true;
+
+            if (gameOver == true)
+            {
+                Music.clip = gameover_music; Music.Play();
+            }
+        }
     }
 
     public void GameOver()
