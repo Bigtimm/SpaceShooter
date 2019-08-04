@@ -10,7 +10,8 @@ public class Done_Boundary
 
 public class Done_PlayerController : MonoBehaviour
 {
-	public float speed;
+    private const float V = 6.0f;
+    public float speed;
 	public float tilt;
 	public Done_Boundary boundary;
 
@@ -26,7 +27,7 @@ public class Done_PlayerController : MonoBehaviour
 	private void Start ()
 	{
 		rb = GetComponent<Rigidbody>();
-		timePassed = 3.0f;
+		timePassed = V;
 		enemyCollide = GameObject.Find("Enemy").GetComponent<Collider>();
 	}
 	

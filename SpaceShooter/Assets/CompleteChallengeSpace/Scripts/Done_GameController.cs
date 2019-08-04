@@ -19,6 +19,7 @@ public class Done_GameController : MonoBehaviour
     public Text scoreText;
     public Text restartText;
     public Text gameOverText;
+    public Text hardText;
     
     public static bool winGame;
     public bool gameOver;
@@ -40,6 +41,7 @@ public class Done_GameController : MonoBehaviour
         restartText.text = "";
         gameOverText.text = "";
         winText.text = "";
+        hardText.text = "";
         score = 0;
         timePassed = 0;
         UpdateScore();
@@ -61,17 +63,19 @@ public class Done_GameController : MonoBehaviour
             Application.Quit();
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown("enter"))
         {
             hard = !hard;
             if(hard)
             {
+                hard = true;
                 waveWait = 0;
             }
             
             else
             {
-                waveWait = 4;
+                hard = true;
+                waveWait = 6;
             }
         }
     }
@@ -116,6 +120,7 @@ public class Done_GameController : MonoBehaviour
     }
     void UpdateScore()
     {
+        hardText.text = "Enter for Hardmode";
         scoreText.text = "Points: " + score;
         if (score >= 100)
         {
