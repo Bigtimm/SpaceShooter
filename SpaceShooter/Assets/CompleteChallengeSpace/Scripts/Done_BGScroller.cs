@@ -8,7 +8,6 @@ public class Done_BGScroller : MonoBehaviour
 	private bool called;
 
 	private Vector3 startPosition;
-	public Done_GameController gameController;
 
 	void Start ()
 	{
@@ -20,10 +19,10 @@ public class Done_BGScroller : MonoBehaviour
 		float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
 		transform.position = startPosition + Vector3.forward * newPosition;
 
-	if (gameController.winGame == true && called == false)
+	if (Done_GameController.winGame == true && called == false)
 		{
 			called = true;
-			scrollSpeed -= 5.0f;
+			scrollSpeed -= 15.0f;
 		}
 
 	}

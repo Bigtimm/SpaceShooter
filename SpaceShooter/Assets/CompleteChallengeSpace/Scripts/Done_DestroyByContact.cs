@@ -11,6 +11,7 @@ public class Done_DestroyByContact : MonoBehaviour
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
+	public float nextFire;
 
 
 
@@ -34,7 +35,7 @@ public class Done_DestroyByContact : MonoBehaviour
 			return;
 		}
  		
-		 if (gameController.winGame == true)
+		 if (Done_GameController.winGame == true)
         {
             return;
         }
@@ -54,7 +55,6 @@ public class Done_DestroyByContact : MonoBehaviour
 			Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
 		}
-		
 		
 		gameController.AddScore(scoreValue);
 		Destroy (other.gameObject);

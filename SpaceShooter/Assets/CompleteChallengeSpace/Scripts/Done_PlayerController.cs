@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Done_Boundary 
@@ -16,8 +17,18 @@ public class Done_PlayerController : MonoBehaviour
 	public GameObject shot;
 	public Transform shotSpawn;
 	public float fireRate;
-	 
+	public float timePassed;
 	public float nextFire;
+	Collider enemyCollide;
+	private Rigidbody rb;
+	
+
+	private void Start ()
+	{
+		rb = GetComponent<Rigidbody>();
+		timePassed = 3.0f;
+		enemyCollide = GameObject.Find("Enemy").GetComponent<Collider>();
+	}
 	
 	void Update ()
 	{
@@ -46,5 +57,39 @@ public class Done_PlayerController : MonoBehaviour
 		);
 		
 		GetComponent<Rigidbody>().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * -tilt);
+
+		if (Done_GameController.winGame == true)
+		{
+			transform.Translate(Vector3.forward * Time.deltaTime * speed/2);
+		}
+	}
+
+	public void winMove ()
+	{
+		boundary.zMax = 40.0f;
+		enemyCollide.isTrigger =  false;
+	}
+
+	IEnumerator IncreasedFire ()
+	{
+			float time = 0;
+			while (time < timePassed)
+		{
+			timePassed += Time.deltaTime;
+			fireRate = 0.1f;
+			yield return null;
+		}
+		
+			fireRate = 1.50f;
+	}
+	
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Powerup 1"))
+		{
+			other.gameObject.SetActive (false);
+			StartCoroutine("IncreasedFire");
+		}
 	}
 }

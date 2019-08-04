@@ -5,21 +5,25 @@ using UnityEngine.UI;
 
 public class Done_GameController : MonoBehaviour
 {
+    private Done_PlayerController playerController;
     public GameObject[] hazards;
     public Vector3 spawnValues;
     public int hazardCount;
     public float spawnWait;
     public float startWait;
     public float waveWait;
+    public float timePassed;
+    private float speed = 30.0f;
     
     public Text winText;
     public Text scoreText;
     public Text restartText;
     public Text gameOverText;
     
-    public bool winGame;
+    public static bool winGame;
     public bool gameOver;
     private bool restart;
+    private bool hard;
     private int score;
     private AudioSource Music;
     public AudioClip music_background;
@@ -37,6 +41,7 @@ public class Done_GameController : MonoBehaviour
         gameOverText.text = "";
         winText.text = "";
         score = 0;
+        timePassed = 0;
         UpdateScore();
         StartCoroutine(SpawnWaves());
     }
@@ -55,6 +60,20 @@ public class Done_GameController : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            hard = !hard;
+            if(hard)
+            {
+                waveWait = 0;
+            }
+            
+            else
+            {
+                waveWait = 4;
+            }
+        }
     }
 
     IEnumerator SpawnWaves()
@@ -70,6 +89,7 @@ public class Done_GameController : MonoBehaviour
                 Instantiate(hazard, spawnPosition, spawnRotation);
                 yield return new WaitForSeconds(spawnWait);
             }
+    
             yield return new WaitForSeconds(waveWait);
 
             if (gameOver)
@@ -105,6 +125,7 @@ public class Done_GameController : MonoBehaviour
             restart = true;
             winGame = true;
             Music.clip = win_music; Music.Play();
+            playerController.winMove();
         }
     }
 
