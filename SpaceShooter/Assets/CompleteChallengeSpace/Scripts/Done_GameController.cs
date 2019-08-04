@@ -21,9 +21,15 @@ public class Done_GameController : MonoBehaviour
     public bool gameOver;
     private bool restart;
     private int score;
+    private AudioSource Music;
+    public AudioClip music_background;
+    public AudioClip win_music;
+    public AudioClip gameover_music;
 
     void Start()
     {
+        Music = GetComponent<AudioSource>();
+        Music.clip = music_background;
         winGame = false;
         gameOver = false;
         restart = false;
@@ -48,16 +54,6 @@ public class Done_GameController : MonoBehaviour
         if (Input.GetKey("escape"))
         {
             Application.Quit();
-        }
-
-		if (winGame)
-		{
-            GetComponent<AudioSource>().Play();
-		}
-
-        if (gameOver)
-        {
-            GetComponent<AudioSource>().Play();
         }
     }
 
@@ -97,34 +93,29 @@ public class Done_GameController : MonoBehaviour
     {
         score += newScoreValue;
         UpdateScore();
-        
-        if (score == 100)
-        {
-            winText.text = "You Win! Game Created By Timmothy Tapia";
-            winGame = true;
-        }
-
-        if (score > 100)
-        {
-            gameOverText.text = "Game Over!";
-            gameOver = true;
-        }
-
-        if (score < 0)
-        {
-            gameOverText.text = "Game Over!";
-            gameOver = true;
-        }
-
     }
     void UpdateScore()
     {
         scoreText.text = "Points: " + score;
+        if (score >= 100)
+        {
+            winText.text = "You Win! Game Created By Timmothy Tapia";
+            winGame = true;
+            gameOver = true;
+            restart = true;
+            winGame = true;
+            Music.clip = win_music; Music.Play();
+        }
     }
 
     public void GameOver()
     {
         gameOverText.text = "Game Over!";
         gameOver = true;
+        
+        if (gameOver == true)
+        {
+            Music.clip = gameover_music; Music.Play();
+        }
     }
 }
